@@ -17,7 +17,6 @@ import { RegionsService } from './Region/region.service';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         dialect: 'postgres',
-        host: configService.get<string>('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),

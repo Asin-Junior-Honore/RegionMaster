@@ -38,6 +38,13 @@ exports.AppModule = AppModule = __decorate([
                     database: configService.get('DB_NAME'),
                     autoLoadModels: true,
                     synchronize: true,
+                    dialectOptions: {
+                        ssl: {
+                            require: true,
+                            rejectUnauthorized: false,
+                        },
+                    },
+                    inject: [config_1.ConfigService],
                 }),
                 inject: [config_1.ConfigService],
             }),

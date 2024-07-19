@@ -1,73 +1,224 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# RegionMaster
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The RegionMaster provides endpoints for managing regions and handling administrative tasks. It includes functionality for admin registration, login, and region management. The API uses JWT for authentication and supports role-based access.
 
-## Description
+## Authentication
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The API uses JWT (JSON Web Tokens) for securing endpoints. Admins must be authenticated to access protected routes.
 
-## Installation
+## Endpoints
 
-```bash
-$ npm install
-```
+### Admin Endpoints
 
-## Running the app
+#### 1. Register a New Admin
 
-```bash
-# development
-$ npm run start
+- **Endpoint:** `POST /admin/register`
+- **Description:** Registers a new admin.
+- **Request Body:**
+  ```json
+  {
+    "username": "string",
+    "email": "string",
+    "password": "string",
+    "role": "admin" | "moderator"
+  }
+  ```
+- **Responses:**
+  - **200 OK**
+    ```json
+    {
+      "status_code": 200,
+      "message": "Admin registered successfully"
+    }
+    ```
+  - **422 Unprocessable Entity**
+    ```json
+    {
+      "status_code": 422,
+      "data": [
+        { "message": "Username is required", "field": "username" },
+        { "message": "Email is required", "field": "email" },
+        { "message": "Password is required", "field": "password" },
+        { "message": "Role must be either admin or moderator", "field": "role" }
+      ]
+    }
+    ```
 
-# watch mode
-$ npm run start:dev
+#### 2. Admin Login
 
-# production mode
-$ npm run start:prod
-```
+- **Endpoint:** `POST /admin/login`
+- **Description:** Logs an admin in and returns a JWT token.
+- **Request Body:**
+  ```json
+  {
+    "email": "string",
+    "password": "string"
+  }
+  ```
+- **Responses:**
+  - **200 OK**
+    ```json
+    {
+      "message": "Login successful",
+      "access_token": "string"
+    }
+    ```
+  - **422 Unprocessable Entity**
+    ```json
+    {
+      "status_code": 422,
+      "data": [
+        { "message": "Email is required", "field": "email" },
+        { "message": "Password is required", "field": "password" }
+      ]
+    }
+    ```
+  - **404 Not Found**
+    ```json
+    {
+      "message": "Admin not found"
+    }
+    ```
+  - **401 Unauthorized**
+    ```json
+    {
+      "message": "Invalid credentials"
+    }
+    ```
 
-## Test
+### Region Endpoints
 
-```bash
-# unit tests
-$ npm run test
+#### 1. Retrieve All Regions
 
-# e2e tests
-$ npm run test:e2e
+- **Endpoint:** `GET /v1/api/regions`
+- **Description:** Retrieves all regions.
+- **Responses:**
+  - **200 OK**
+    ```json
+    [
+      {
+        "region_code": "string",
+        "region_name": "string",
+        "status": "active" | "inactive",
+        "created_on": "string",
+        "created_by": "string",
+        "modified_on": "string",
+        "modified_by": "string"
+      }
+    ]
+    ```
+  - **404 Not Found**
+    ```json
+    {
+      "status_code": 404,
+      "message": "No regions found"
+    }
+    ```
 
-# test coverage
-$ npm run test:cov
-```
+#### 2. Create a New Region
 
-## Support
+- **Endpoint:** `POST /v1/api/regions`
+- **Description:** Creates a new region.
+- **Request Body:**
+  ```json
+  {
+    "region_code": "string",
+    "region_name": "string",
+    "status": "active" | "inactive"
+  }
+  ```
+- **Responses:**
+  - **200 OK**
+    ```json
+    {
+      "status_code": 200,
+      "message": "Operation was successful"
+    }
+    ```
+  - **422 Unprocessable Entity**
+    ```json
+    {
+      "status_code": 422,
+      "data": [
+        { "message": "Region code is required", "field": "region_code" },
+        { "message": "Region name is required", "field": "region_name" },
+        { "message": "Status is required", "field": "status" }
+      ]
+    }
+    ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### 3. Update an Existing Region
 
-## Stay in touch
+- **Endpoint:** `PUT /v1/api/regions/:regionCode`
+- **Description:** Updates an existing region.
+- **Request Parameters:**
+  - `regionCode`: The code of the region to update.
+- **Request Body:**
+  ```json
+  {
+    "region_name": "string",
+    "status": "active" | "inactive"
+  }
+  ```
+- **Responses:**
+  - **200 OK**
+    ```json
+    {
+      "status_code": 200,
+      "message": "Operation was successful"
+    }
+    ```
+  - **404 Not Found**
+    ```json
+    {
+      "status_code": 404,
+      "message": "Region with code NA not found"
+    }
+    ```
+  - **422 Unprocessable Entity**
+    ```json
+    {
+      "status_code": 422,
+      "data": [
+        {
+          "message": "Status must be either 'active' or 'inactive'",
+          "field": "status"
+        },
+        { "message": "Region name already exists", "field": "region_name" }
+      ]
+    }
+    ```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### 4. Delete a Region
 
-## License
+- **Endpoint:** `DELETE /v1/api/regions/:regionCode`
+- **Description:** Deletes a region.
+- **Request Parameters:**
+  - `regionCode`: The code of the region to delete.
+- **Responses:**
+  - **200 OK**
+    ```json
+    {
+      "status_code": 200,
+      "message": "Operation was successful"
+    }
+    ```
+  - **404 Not Found**
+    ```json
+    {
+      "status_code": 404,
+      "message": "Region with code NA not found"
+    }
+    ```
 
-Nest is [MIT licensed](LICENSE).
+## Authentication
+
+- **Token Type:** Bearer Token
+- **Token Required:** Yes
+- **Header:** `Authorization: Bearer <token>`
+
+## Error Handling
+
+The API uses HTTP status codes and JSON responses to indicate the result of requests and any errors that may occur.

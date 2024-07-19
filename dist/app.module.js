@@ -17,6 +17,7 @@ const sequelize_1 = require("@nestjs/sequelize");
 const admins_model_1 = require("./admins/admins.model");
 const region_controller_1 = require("./Region/region.controller");
 const region_model_1 = require("./Region/region.model");
+const pg_1 = require("pg");
 const region_service_1 = require("./Region/region.service");
 let AppModule = class AppModule {
 };
@@ -29,6 +30,7 @@ exports.AppModule = AppModule = __decorate([
                 imports: [config_1.ConfigModule],
                 useFactory: async (configService) => ({
                     dialect: 'postgres',
+                    dialectModule: pg_1.default,
                     port: configService.get('DB_PORT'),
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),

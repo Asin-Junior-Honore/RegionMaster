@@ -8,6 +8,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Admin } from './admins/admins.model';
 import { RegionsController } from './Region/region.controller';
 import { Region } from './Region/region.model';
+import pg from 'pg'
 import { RegionsService } from './Region/region.service';
 
 @Module({
@@ -17,6 +18,7 @@ import { RegionsService } from './Region/region.service';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         dialect: 'postgres',
+        dialectModule: pg,
         port: configService.get<number>('DB_PORT'),
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),

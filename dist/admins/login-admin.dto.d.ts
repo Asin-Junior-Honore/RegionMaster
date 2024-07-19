@@ -1,4 +1,4 @@
 export declare class LoginAdminDto {
-    readonly email: string;
-    readonly password: string;
+    email: string;
+    password: string;
 }

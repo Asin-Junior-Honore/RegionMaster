@@ -23,7 +23,8 @@ export class AppController {
             background: linear-gradient(135deg, #f5af19, #f12711);
             color: #fff;
             animation: backgroundAnimation 15s ease infinite;
-          }
+            padding: 0 1rem;
+           }
           @keyframes backgroundAnimation {
             0% { background: linear-gradient(135deg, #f5af19, #f12711); }
             50% { background: linear-gradient(135deg, #f12711, #f5af19); }

@@ -31,9 +31,6 @@ export class RegionsService {
 
     let { RegionCode, RegionName, Status } = createRegionDto;
 
-    // Capitalize region code
-    RegionCode = RegionCode.toUpperCase();
-
     // Validation logic
     if (!RegionCode || !RegionName || !Status) {
       throw new UnprocessableEntityException({
@@ -44,6 +41,11 @@ export class RegionsService {
           { message: 'Status is required', field: 'Status' },
         ],
       });
+    }
+
+    // Capitalize region code if defined
+    if (RegionCode) {
+      RegionCode = RegionCode.toUpperCase();
     }
 
     if (Status !== 'active' && Status !== 'inactive') {

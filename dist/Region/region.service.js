@@ -36,7 +36,6 @@ let RegionsService = class RegionsService {
             });
         }
         let { RegionCode, RegionName, Status } = createRegionDto;
-        RegionCode = RegionCode.toUpperCase();
         if (!RegionCode || !RegionName || !Status) {
             throw new common_1.UnprocessableEntityException({
                 status_code: 422,
@@ -46,6 +45,9 @@ let RegionsService = class RegionsService {
                     { message: 'Status is required', field: 'Status' },
                 ],
             });
+        }
+        if (RegionCode) {
+            RegionCode = RegionCode.toUpperCase();
         }
         if (Status !== 'active' && Status !== 'inactive') {
             throw new common_1.UnprocessableEntityException({

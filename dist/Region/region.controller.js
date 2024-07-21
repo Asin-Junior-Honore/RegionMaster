@@ -28,11 +28,11 @@ let RegionsController = class RegionsController {
     async createRegion(createRegionDto, req) {
         return this.regionsService.createRegion(createRegionDto, req.user);
     }
-    async updateRegion(regionCode, updateRegionDto, req) {
-        return this.regionsService.updateRegion(regionCode, updateRegionDto, req.user);
+    async updateRegion(RegionCode, updateRegionDto, req) {
+        return this.regionsService.updateRegion(RegionCode, updateRegionDto, req.user);
     }
-    async deleteRegion(regionCode) {
-        return this.regionsService.deleteRegion(regionCode);
+    async deleteRegion(RegionCode) {
+        return this.regionsService.deleteRegion(RegionCode);
     }
 };
 exports.RegionsController = RegionsController;
@@ -53,8 +53,8 @@ __decorate([
 ], RegionsController.prototype, "createRegion", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Put)(':regionCode'),
-    __param(0, (0, common_1.Param)('regionCode')),
+    (0, common_1.Put)(':RegionCode'),
+    __param(0, (0, common_1.Param)('RegionCode')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -63,14 +63,14 @@ __decorate([
 ], RegionsController.prototype, "updateRegion", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Delete)(':regionCode'),
-    __param(0, (0, common_1.Param)('regionCode')),
+    (0, common_1.Delete)(':RegionCode'),
+    __param(0, (0, common_1.Param)('RegionCode')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], RegionsController.prototype, "deleteRegion", null);
 exports.RegionsController = RegionsController = __decorate([
-    (0, common_1.Controller)('v1/api/regions'),
+    (0, common_1.Controller)('v1/api/Regions'),
     __metadata("design:paramtypes", [region_service_1.RegionsService])
 ], RegionsController);
 //# sourceMappingURL=region.controller.js.map

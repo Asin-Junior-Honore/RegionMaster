@@ -18,15 +18,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateRegionDto.prototype, "region_code", void 0);
+], CreateRegionDto.prototype, "RegionCode", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateRegionDto.prototype, "region_name", void 0);
+], CreateRegionDto.prototype, "RegionName", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateRegionDto.prototype, "status", void 0);
+], CreateRegionDto.prototype, "Status", void 0);
 //# sourceMappingURL=create-region.dto.js.map

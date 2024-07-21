@@ -1,4 +1,4 @@
 export declare class UpdateRegionDto {
-    region_name?: string;
-    status?: string;
+    RegionName?: string;
+    Status?: string;
 }

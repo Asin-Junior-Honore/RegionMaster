@@ -6,6 +6,6 @@ export declare class RegionsController {
     constructor(regionsService: RegionsService);
     findAllRegions(): Promise<import("./region.model").Region[]>;
     createRegion(createRegionDto: CreateRegionDto, req: any): Promise<any>;
-    updateRegion(regionCode: string, updateRegionDto: UpdateRegionDto, req: any): Promise<any>;
-    deleteRegion(regionCode: string): Promise<any>;
+    updateRegion(RegionCode: string, updateRegionDto: UpdateRegionDto, req: any): Promise<any>;
+    deleteRegion(RegionCode: string): Promise<any>;
 }

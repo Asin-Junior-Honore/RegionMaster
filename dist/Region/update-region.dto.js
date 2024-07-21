@@ -18,10 +18,10 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateRegionDto.prototype, "region_name", void 0);
+], UpdateRegionDto.prototype, "RegionName", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateRegionDto.prototype, "status", void 0);
+], UpdateRegionDto.prototype, "Status", void 0);
 //# sourceMappingURL=update-region.dto.js.map

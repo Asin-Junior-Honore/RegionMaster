@@ -1,25 +1,25 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table({ tableName: 'Regions' })
+@Table({ tableName: 'Regions', timestamps: false })
 export class Region extends Model<Region> {
-  @Column({ field: 'region_code', primaryKey: true, type: DataType.STRING, allowNull: false })
-  region_code: string;
+  @Column({ field: 'RegionCode', primaryKey: true, type: DataType.STRING, allowNull: false })
+  RegionCode: string;
 
-  @Column({ field: 'region_name', type: DataType.STRING, allowNull: false })
-  region_name: string;
+  @Column({ field: 'RegionName', type: DataType.STRING, allowNull: false })
+  RegionName: string;
 
-  @Column({ field: 'status', type: DataType.ENUM('active', 'inactive'), allowNull: false })
-  status: string;
+  @Column({ field: 'Status', type: DataType.ENUM('active', 'inactive'), allowNull: false })
+  Status: string;
 
-  @Column({ field: 'created_on', type: DataType.DATE, allowNull: false })
-  created_on: Date;
+  @Column({ field: 'CreatedOn', type: DataType.DATE, allowNull: false })
+  CreatedOn: Date;
 
-  @Column({ field: 'created_by', type: DataType.STRING, allowNull: false })
-  created_by: string;
+  @Column({ field: 'CreatedBy', type: DataType.STRING, allowNull: false })
+  CreatedBy: string;
 
-  @Column({ field: 'modified_on', type: DataType.DATE, allowNull: false })
-  modified_on: Date;
+  @Column({ field: 'ModifiedOn', type: DataType.DATE, allowNull: false })
+  ModifiedOn: Date;
 
-  @Column({ field: 'modified_by', type: DataType.STRING, allowNull: false })
-  modified_by: string;
+  @Column({ field: 'ModifiedBy', type: DataType.STRING, allowNull: false })
+  ModifiedBy: string;
 }

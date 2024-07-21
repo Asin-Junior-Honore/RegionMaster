@@ -12,62 +12,62 @@ export class RegionsService {
   ) { }
 
   async createRegion(createRegionDto: CreateRegionDto, user: any): Promise<any> {
-    let { region_code, region_name, status } = createRegionDto;
+    let { RegionCode, RegionName, Status } = createRegionDto;
 
     // Capitalize region code
-    region_code = region_code.toUpperCase();
+    RegionCode = RegionCode.toUpperCase();
 
     // Validation logic
-    if (!region_code || !region_name || !status) {
+    if (!RegionCode || !RegionName || !Status) {
       throw new UnprocessableEntityException({
         status_code: 422,
         data: [
-          { message: 'Region code is required', field: 'region_code' },
-          { message: 'Region name is required', field: 'region_name' },
-          { message: 'Status is required', field: 'status' },
+          { message: 'Region code is required', field: 'RegionCode' },
+          { message: 'Region name is required', field: 'RegionName' },
+          { message: 'Status is required', field: 'Status' },
         ],
       });
     }
 
-    if (status !== 'active' && status !== 'inactive') {
+    if (Status !== 'active' && Status !== 'inactive') {
       throw new UnprocessableEntityException({
         status_code: 422,
         data: [
-          { message: 'Status must be either "active" or "inactive"', field: 'status' },
+          { message: 'Status must be either "active" or "inactive"', field: 'Status' },
         ],
       });
     }
 
     // Check for existing region code
-    const existingRegionCode = await this.regionModel.findOne({ where: { region_code } });
+    const existingRegionCode = await this.regionModel.findOne({ where: { RegionCode } });
     if (existingRegionCode) {
       throw new UnprocessableEntityException({
         status_code: 422,
         data: [
-          { message: 'Region code already exists', field: 'region_code' },
+          { message: 'Region code already exists', field: 'RegionCode' },
         ],
       });
     }
 
     // Check for existing region name
-    const existingRegionName = await this.regionModel.findOne({ where: { region_name } });
+    const existingRegionName = await this.regionModel.findOne({ where: { RegionName } });
     if (existingRegionName) {
       throw new UnprocessableEntityException({
         status_code: 422,
         data: [
-          { message: 'Region name already exists', field: 'region_name' },
+          { message: 'Region name already exists', field: 'RegionName' },
         ],
       });
     }
 
     const newRegion = new Region({
-      region_code,
-      region_name,
-      status,
-      created_on: new Date(),
-      created_by: user.username,
-      modified_on: new Date(),
-      modified_by: user.username,
+      RegionCode,
+      RegionName,
+      Status,
+      CreatedOn: new Date(),
+      CreatedBy: user.username,
+      ModifiedOn: new Date(),
+      ModifiedBy: user.username,
     });
 
     await newRegion.save();
@@ -82,45 +82,45 @@ export class RegionsService {
     return this.regionModel.findAll();
   }
 
-  async updateRegion(region_code: string, updateRegionDto: UpdateRegionDto, user: any): Promise<any> {
-    region_code = region_code.toUpperCase();
-    const region = await this.regionModel.findOne({ where: { region_code } });
+  async updateRegion(regionCode: string, updateRegionDto: UpdateRegionDto, user: any): Promise<any> {
+    regionCode = regionCode.toUpperCase();
+    const region = await this.regionModel.findOne({ where: { RegionCode: regionCode } });
     if (!region) {
       throw new NotFoundException({
         status_code: 404,
-        message: `Region with code ${region_code} not found`,
+        message: `Region with code ${regionCode} not found`,
       });
     }
 
-    const { region_name, status } = updateRegionDto;
+    const { RegionName, Status } = updateRegionDto;
 
     // Validation for status
-    if (status && status !== 'active' && status !== 'inactive') {
+    if (Status && Status !== 'active' && Status !== 'inactive') {
       throw new UnprocessableEntityException({
         status_code: 422,
         data: [
-          { message: 'Status must be either "active" or "inactive"', field: 'status' },
+          { message: 'Status must be either "active" or "inactive"', field: 'Status' },
         ],
       });
     }
 
     // Check for existing region name if it's being updated
-    if (region_name && region_name !== region.region_name) {
-      const existingRegionName = await this.regionModel.findOne({ where: { region_name } });
+    if (RegionName && RegionName !== region.RegionName) {
+      const existingRegionName = await this.regionModel.findOne({ where: { RegionName } });
       if (existingRegionName) {
         throw new UnprocessableEntityException({
           status_code: 422,
           data: [
-            { message: 'Region name already exists', field: 'region_name' },
+            { message: 'Region name already exists', field: 'RegionName' },
           ],
         });
       }
-      region.region_name = region_name;
+      region.RegionName = RegionName;
     }
 
-    region.status = status || region.status;
-    region.modified_on = new Date();
-    region.modified_by = user.username;
+    region.Status = Status || region.Status;
+    region.ModifiedOn = new Date();
+    region.ModifiedBy = user.username;
 
     await region.save();
 
@@ -130,13 +130,13 @@ export class RegionsService {
     };
   }
 
-  async deleteRegion(region_code: string): Promise<any> {
-    region_code = region_code.toUpperCase();
-    const result = await this.regionModel.destroy({ where: { region_code } });
+  async deleteRegion(regionCode: string): Promise<any> {
+    regionCode = regionCode.toUpperCase();
+    const result = await this.regionModel.destroy({ where: { RegionCode: regionCode } });
     if (result === 0) {
       throw new NotFoundException({
         status_code: 404,
-        message: `Region with code ${region_code} not found`,
+        message: `Region with code ${regionCode} not found`,
       });
     }
 

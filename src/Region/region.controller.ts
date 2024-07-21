@@ -4,7 +4,7 @@ import { CreateRegionDto } from './create-region.dto';
 import { UpdateRegionDto } from './update-region.dto';
 import { RegionsService } from './region.service';
 
-@Controller('v1/api/regions')
+@Controller('v1/api/Regions')
 export class RegionsController {
   constructor(private readonly regionsService: RegionsService) { }
 
@@ -20,18 +20,18 @@ export class RegionsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put(':regionCode')
+  @Put(':RegionCode')
   async updateRegion(
-    @Param('regionCode') regionCode: string,
+    @Param('RegionCode') RegionCode: string,
     @Body() updateRegionDto: UpdateRegionDto,
     @Request() req
   ) {
-    return this.regionsService.updateRegion(regionCode, updateRegionDto, req.user);
+    return this.regionsService.updateRegion(RegionCode, updateRegionDto, req.user);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':regionCode')
-  async deleteRegion(@Param('regionCode') regionCode: string) {
-    return this.regionsService.deleteRegion(regionCode);
+  @Delete(':RegionCode')
+  async deleteRegion(@Param('RegionCode') RegionCode: string) {
+    return this.regionsService.deleteRegion(RegionCode);
   }
 }

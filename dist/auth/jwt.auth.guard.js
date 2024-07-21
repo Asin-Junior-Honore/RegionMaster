@@ -21,16 +21,20 @@ let JwtAuthGuard = class JwtAuthGuard {
     canActivate(context) {
         const request = context.switchToHttp().getRequest();
         const token = request.headers.authorization?.split(' ')[1];
+        console.log('Token:', token);
         if (!token) {
-            return false;
+            console.log('Token is missing');
+            throw new common_1.UnauthorizedException('Authentication token is missing');
         }
         try {
             const user = this.jwtService.verify(token);
             request.user = user;
+            console.log('User:', user);
             return true;
         }
         catch (error) {
-            return false;
+            console.log('Token verification error:', error);
+            throw new common_1.UnauthorizedException('Invalid or expired token');
         }
     }
 };

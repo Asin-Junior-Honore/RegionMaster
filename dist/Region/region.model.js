@@ -15,34 +15,34 @@ let Region = class Region extends sequelize_typescript_1.Model {
 };
 exports.Region = Region;
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'region_code', primaryKey: true, type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'RegionCode', primaryKey: true, type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
     __metadata("design:type", String)
-], Region.prototype, "region_code", void 0);
+], Region.prototype, "RegionCode", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'region_name', type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'RegionName', type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
     __metadata("design:type", String)
-], Region.prototype, "region_name", void 0);
+], Region.prototype, "RegionName", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'status', type: sequelize_typescript_1.DataType.ENUM('active', 'inactive'), allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'Status', type: sequelize_typescript_1.DataType.ENUM('active', 'inactive'), allowNull: false }),
     __metadata("design:type", String)
-], Region.prototype, "status", void 0);
+], Region.prototype, "Status", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'created_on', type: sequelize_typescript_1.DataType.DATE, allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'CreatedOn', type: sequelize_typescript_1.DataType.DATE, allowNull: false }),
     __metadata("design:type", Date)
-], Region.prototype, "created_on", void 0);
+], Region.prototype, "CreatedOn", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'created_by', type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'CreatedBy', type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
     __metadata("design:type", String)
-], Region.prototype, "created_by", void 0);
+], Region.prototype, "CreatedBy", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'modified_on', type: sequelize_typescript_1.DataType.DATE, allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'ModifiedOn', type: sequelize_typescript_1.DataType.DATE, allowNull: false }),
     __metadata("design:type", Date)
-], Region.prototype, "modified_on", void 0);
+], Region.prototype, "ModifiedOn", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'modified_by', type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
+    (0, sequelize_typescript_1.Column)({ field: 'ModifiedBy', type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
     __metadata("design:type", String)
-], Region.prototype, "modified_by", void 0);
+], Region.prototype, "ModifiedBy", void 0);
 exports.Region = Region = __decorate([
-    (0, sequelize_typescript_1.Table)({ tableName: 'Regions' })
+    (0, sequelize_typescript_1.Table)({ tableName: 'Regions', timestamps: false })
 ], Region);
 //# sourceMappingURL=region.model.js.map

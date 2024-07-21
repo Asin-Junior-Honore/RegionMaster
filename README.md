@@ -99,13 +99,13 @@ The API uses JWT (JSON Web Tokens) for securing endpoints. Admins must be authen
     ```json
     [
       {
-        "region_code": "string",
-        "region_name": "string",
-        "status": "active" | "inactive",
-        "created_on": "string",
-        "created_by": "string",
-        "modified_on": "string",
-        "modified_by": "string"
+        "RegionCode": "string",
+        "RegionName": "string",
+        "Status": "active" | "inactive",
+        "CreatedOn": "string",
+        "CreatedBy": "string",
+        "ModifiedOn": "string",
+        "ModifiedBy": "string"
       }
     ]
     ```
@@ -124,9 +124,9 @@ The API uses JWT (JSON Web Tokens) for securing endpoints. Admins must be authen
 - **Request Body:**
   ```json
   {
-    "region_code": "string",
-    "region_name": "string",
-    "status": "active" | "inactive"
+    "RegionCode": "string",
+    "RegionName": "string",
+    "Status": "active" | "inactive"
   }
   ```
 - **Responses:**
@@ -142,24 +142,24 @@ The API uses JWT (JSON Web Tokens) for securing endpoints. Admins must be authen
     {
       "status_code": 422,
       "data": [
-        { "message": "Region code is required", "field": "region_code" },
-        { "message": "Region name is required", "field": "region_name" },
-        { "message": "Status is required", "field": "status" }
+        { "message": "Region code is required", "field": "RegionCode" },
+        { "message": "Region name is required", "field": "RegionName" },
+        { "message": "Status is required", "field": "Status" }
       ]
     }
     ```
 
 #### 3. Update an Existing Region
 
-- **Endpoint:** `PUT /v1/api/regions/:regionCode`
+- **Endpoint:** `PUT /v1/api/regions/:RegionCode`
 - **Description:** Updates an existing region.
 - **Request Parameters:**
-  - `regionCode`: The code of the region to update.
+  - `RegionCode`: The code of the region to update.
 - **Request Body:**
   ```json
   {
-    "region_name": "string",
-    "status": "active" | "inactive"
+    "RegionName": "string",
+    "Status": "active" | "inactive"
   }
   ```
 - **Responses:**
@@ -184,19 +184,19 @@ The API uses JWT (JSON Web Tokens) for securing endpoints. Admins must be authen
       "data": [
         {
           "message": "Status must be either 'active' or 'inactive'",
-          "field": "status"
+          "field": "Status"
         },
-        { "message": "Region name already exists", "field": "region_name" }
+        { "message": "Region name already exists", "field": "RegionName" }
       ]
     }
     ```
 
 #### 4. Delete a Region
 
-- **Endpoint:** `DELETE /v1/api/regions/:regionCode`
+- **Endpoint:** `DELETE /v1/api/regions/:RegionCode`
 - **Description:** Deletes a region.
 - **Request Parameters:**
-  - `regionCode`: The code of the region to delete.
+  - `RegionCode`: The code of the region to delete.
 - **Responses:**
   - **200 OK**
     ```json

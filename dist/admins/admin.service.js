@@ -58,7 +58,7 @@ let AdminService = class AdminService {
         const admin = new this.adminModel({ username, email, password: hashedPassword, role });
         await admin.save();
         return {
-            status_code: 200,
+            status_code: 201,
             message: 'Admin registered successfully',
         };
     }

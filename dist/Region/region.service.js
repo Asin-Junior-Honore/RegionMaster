@@ -21,6 +21,20 @@ let RegionsService = class RegionsService {
         this.regionModel = regionModel;
     }
     async createRegion(createRegionDto, user) {
+        const expectedFields = ['RegionCode', 'RegionName', 'Status'];
+        const providedFields = Object.keys(createRegionDto);
+        const unexpectedFields = providedFields.filter(field => !expectedFields.includes(field));
+        if (unexpectedFields.length > 0) {
+            throw new common_1.UnprocessableEntityException({
+                status_code: 422,
+                message: `Unexpected fields: ${unexpectedFields.join(', ')}`,
+                expected_format: {
+                    RegionCode: 'string',
+                    RegionName: 'string',
+                    Status: 'active | inactive'
+                }
+            });
+        }
         let { RegionCode, RegionName, Status } = createRegionDto;
         RegionCode = RegionCode.toUpperCase();
         if (!RegionCode || !RegionName || !Status) {

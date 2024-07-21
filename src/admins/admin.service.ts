@@ -55,7 +55,7 @@ export class AdminService {
         await admin.save();
 
         return {
-            status_code: 200,
+            status_code: 201,
             message: 'Admin registered successfully',
         };
     }

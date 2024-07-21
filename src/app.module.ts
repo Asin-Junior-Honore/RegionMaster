@@ -27,16 +27,14 @@ import { AppController } from './app.controller';
         database: configService.get<string>('DB_NAME'),
         autoLoadModels: true,
         synchronize: true,
-      dialectOptions: {
-           ssl: {
-             require: true,
-             rejectUnauthorized: false,
-           },
-         },
-
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        },
         inject: [ConfigService],
       }),
-      
       inject: [ConfigService],
     }),
     SequelizeModule.forFeature([Admin, Region]),

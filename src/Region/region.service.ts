@@ -12,6 +12,23 @@ export class RegionsService {
   ) { }
 
   async createRegion(createRegionDto: CreateRegionDto, user: any): Promise<any> {
+    const expectedFields = ['RegionCode', 'RegionName', 'Status'];
+    const providedFields = Object.keys(createRegionDto);
+
+    // Check for unexpected fields
+    const unexpectedFields = providedFields.filter(field => !expectedFields.includes(field));
+    if (unexpectedFields.length > 0) {
+      throw new UnprocessableEntityException({
+        status_code: 422,
+        message: `Unexpected fields: ${unexpectedFields.join(', ')}`,
+        expected_format: {
+          RegionCode: 'string',
+          RegionName: 'string',
+          Status: 'active | inactive'
+        }
+      });
+    }
+
     let { RegionCode, RegionName, Status } = createRegionDto;
 
     // Capitalize region code

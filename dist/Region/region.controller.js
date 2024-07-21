@@ -14,10 +14,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegionsController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../auth/jwt.auth.guard");
 const create_region_dto_1 = require("./create-region.dto");
 const update_region_dto_1 = require("./update-region.dto");
 const region_service_1 = require("./region.service");
+const jwt_auth_guard_1 = require("../auth/jwt.auth.guard");
 let RegionsController = class RegionsController {
     constructor(regionsService) {
         this.regionsService = regionsService;
@@ -45,6 +45,7 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
+    (0, common_1.HttpCode)(200),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),

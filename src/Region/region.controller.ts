@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Request } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Request, HttpCode } from '@nestjs/common';
 import { CreateRegionDto } from './create-region.dto';
 import { UpdateRegionDto } from './update-region.dto';
 import { RegionsService } from './region.service';
+import { JwtAuthGuard } from '../auth/jwt.auth.guard';
 
 @Controller('v1/api/regions')
 export class RegionsController {
@@ -15,6 +15,7 @@ export class RegionsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
+  @HttpCode(200)
   async createRegion(@Body() createRegionDto: CreateRegionDto, @Request() req) {
     return this.regionsService.createRegion(createRegionDto, req.user);
   }

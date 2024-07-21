@@ -36,6 +36,7 @@ import { AppController } from './app.controller';
 
         inject: [ConfigService],
       }),
+      
       inject: [ConfigService],
     }),
     SequelizeModule.forFeature([Admin, Region]),

@@ -10,6 +10,7 @@ import { RegionsController } from './Region/region.controller';
 import { Region } from './Region/region.model';
 import pg from 'pg'
 import { RegionsService } from './Region/region.service';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -26,12 +27,13 @@ import { RegionsService } from './Region/region.service';
         database: configService.get<string>('DB_NAME'),
         autoLoadModels: true,
         synchronize: true,
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-        },
+        // dialectOptions: {
+        //   ssl: {
+        //     require: true,
+        //     rejectUnauthorized: false,
+        //   },
+        // },
+
 
         inject: [ConfigService],
       }),
@@ -47,7 +49,7 @@ import { RegionsService } from './Region/region.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AdminController, RegionsController],
+  controllers: [AdminController, RegionsController, AppController],
   providers: [AdminService, RegionsService, JwtStrategy],
 })
 export class AppModule { }

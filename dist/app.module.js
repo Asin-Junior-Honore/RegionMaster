@@ -19,6 +19,7 @@ const region_controller_1 = require("./Region/region.controller");
 const region_model_1 = require("./Region/region.model");
 const pg_1 = require("pg");
 const region_service_1 = require("./Region/region.service");
+const app_controller_1 = require("./app.controller");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -38,12 +39,6 @@ exports.AppModule = AppModule = __decorate([
                     database: configService.get('DB_NAME'),
                     autoLoadModels: true,
                     synchronize: true,
-                    dialectOptions: {
-                        ssl: {
-                            require: true,
-                            rejectUnauthorized: false,
-                        },
-                    },
                     inject: [config_1.ConfigService],
                 }),
                 inject: [config_1.ConfigService],
@@ -58,7 +53,7 @@ exports.AppModule = AppModule = __decorate([
                 inject: [config_1.ConfigService],
             }),
         ],
-        controllers: [admin_controller_1.AdminController, region_controller_1.RegionsController],
+        controllers: [admin_controller_1.AdminController, region_controller_1.RegionsController, app_controller_1.AppController],
         providers: [admin_service_1.AdminService, region_service_1.RegionsService, jwt_strategy_1.JwtStrategy],
     })
 ], AppModule);

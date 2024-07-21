@@ -18,7 +18,6 @@ const jwt_auth_guard_1 = require("../auth/jwt.auth.guard");
 const create_region_dto_1 = require("./create-region.dto");
 const update_region_dto_1 = require("./update-region.dto");
 const region_service_1 = require("./region.service");
-const swagger_1 = require("@nestjs/swagger");
 let RegionsController = class RegionsController {
     constructor(regionsService) {
         this.regionsService = regionsService;
@@ -39,27 +38,6 @@ let RegionsController = class RegionsController {
 exports.RegionsController = RegionsController;
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Retrieve all regions' }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'List of all regions',
-        schema: {
-            type: 'array',
-            items: {
-                type: 'object',
-                properties: {
-                    region_code: { type: 'string' },
-                    region_name: { type: 'string' },
-                    status: { type: 'string' },
-                    created_on: { type: 'string', format: 'date-time' },
-                    created_by: { type: 'string' },
-                    modified_on: { type: 'string', format: 'date-time' },
-                    modified_by: { type: 'string' },
-                },
-            },
-        },
-    }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'No regions found' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -67,42 +45,6 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Create a new region' }),
-    (0, swagger_1.ApiBody)({
-        description: 'Details of the region to be created',
-        type: create_region_dto_1.CreateRegionDto,
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Region created successfully',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 200 },
-                message: { type: 'string', example: 'Operation was successful' },
-            },
-        },
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 422,
-        description: 'Validation error',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 422 },
-                data: {
-                    type: 'array',
-                    items: {
-                        type: 'object',
-                        properties: {
-                            message: { type: 'string' },
-                            field: { type: 'string' },
-                        },
-                    },
-                },
-            },
-        },
-    }),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -112,54 +54,6 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Put)(':regionCode'),
-    (0, swagger_1.ApiOperation)({ summary: 'Update an existing region' }),
-    (0, swagger_1.ApiParam)({ name: 'regionCode', description: 'Code of the region to update' }),
-    (0, swagger_1.ApiBody)({
-        description: 'Details of the region to be updated',
-        type: update_region_dto_1.UpdateRegionDto,
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Region updated successfully',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 200 },
-                message: { type: 'string', example: 'Operation was successful' },
-            },
-        },
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 404,
-        description: 'Region not found',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 404 },
-                message: { type: 'string', example: 'Region with code NA not found' },
-            },
-        },
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 422,
-        description: 'Validation error',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 422 },
-                data: {
-                    type: 'array',
-                    items: {
-                        type: 'object',
-                        properties: {
-                            message: { type: 'string' },
-                            field: { type: 'string' },
-                        },
-                    },
-                },
-            },
-        },
-    }),
     __param(0, (0, common_1.Param)('regionCode')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
@@ -170,37 +64,12 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Delete)(':regionCode'),
-    (0, swagger_1.ApiOperation)({ summary: 'Delete a region' }),
-    (0, swagger_1.ApiParam)({ name: 'regionCode', description: 'Code of the region to delete' }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Region deleted successfully',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 200 },
-                message: { type: 'string', example: 'Operation was successful' },
-            },
-        },
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 404,
-        description: 'Region not found',
-        schema: {
-            type: 'object',
-            properties: {
-                status_code: { type: 'number', example: 404 },
-                message: { type: 'string', example: 'Region with code NA not found' },
-            },
-        },
-    }),
     __param(0, (0, common_1.Param)('regionCode')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], RegionsController.prototype, "deleteRegion", null);
 exports.RegionsController = RegionsController = __decorate([
-    (0, swagger_1.ApiTags)('Regions'),
     (0, common_1.Controller)('v1/api/regions'),
     __metadata("design:paramtypes", [region_service_1.RegionsService])
 ], RegionsController);

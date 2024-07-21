@@ -70,7 +70,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], RegionsController.prototype, "deleteRegion", null);
 exports.RegionsController = RegionsController = __decorate([
-    (0, common_1.Controller)('v1/api/Regions'),
+    (0, common_1.Controller)('v1/api/regions'),
     __metadata("design:paramtypes", [region_service_1.RegionsService])
 ], RegionsController);
 //# sourceMappingURL=region.controller.js.map
